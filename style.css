@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 15px; /* Tambahan jarak aman untuk layar HP */
+    padding: 15px;
 }
 
 .app-container {
@@ -51,7 +51,6 @@ body {
 .frame-card:hover { transform: translateY(-2px); background-color: #60a5fa; }
 .frame-card.selected { background-color: #facc15; color: #000; }
 
-/* Mengubah ukuran fix menjadi dinamis */
 .camera-wrapper { 
     position: relative; 
     width: 100%; 
@@ -81,14 +80,12 @@ video { width: 100%; height: 100%; transform: scaleX(-1); object-fit: cover; }
 }
 canvas { width: 100%; height: 100%; object-fit: contain; }
 
-/* Menurunkan ukuran font countdown agar muat di HP */
 #countdown { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Press Start 2P', cursive; font-size: 5rem; color: #facc15; text-shadow: 6px 6px 0px #000; z-index: 10; }
 #flash { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 20; opacity: 0; }
 .flash-anim { animation: flashEffect 0.5s ease-out; }
 @keyframes flashEffect { 0% { opacity: 1; } 100% { opacity: 0; } }
 .hidden { display: none !important; }
 
-/* Menggunakan flex wrap agar tombol bisa turun baris jika kepenuhan */
 .action-bar, .action-grid { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
 .btn { font-family: 'Press Start 2P', cursive; font-size: 1rem; padding: 15px 25px; border: 4px solid #000; border-radius: 8px; cursor: pointer; box-shadow: 4px 4px 0px #000; text-transform: uppercase; }
 .btn:active { transform: translate(4px, 4px); box-shadow: 0px 0px 0px #000; }
@@ -97,7 +94,6 @@ canvas { width: 100%; height: 100%; object-fit: contain; }
 .btn-yellow { background-color: #facc15; color: #000; }
 .btn-blue { background-color: #fff; color: #000; }
 
-/* ATURAN KHUSUS LAYAR HP (Mobile Responsiveness) */
 @media (max-width: 600px) {
     .app-container { padding: 20px 10px; border-width: 4px; box-shadow: 6px 6px 0px #000;}
     .logo-title { font-size: 1.5rem; }
