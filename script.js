@@ -17,7 +17,7 @@ const btnReplay = document.getElementById('btnReplay');
 const countdownEl = document.getElementById('countdown');
 const flashEl = document.getElementById('flash');
 
-let selectedTemplate = 'strip1.svg'; // Default Frame
+let selectedTemplate = 'strip1.svg'; 
 let stream = null;
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -32,14 +32,7 @@ frameCards.forEach(card => {
 
 btnStartGame.addEventListener('click', async function() {
     try {
-        // PERBAIKAN: Memprioritaskan kamera depan HP dan resolusi ideal (bukan mutlak)
-        stream = await navigator.mediaDevices.getUserMedia({ 
-            video: { 
-                facingMode: "user",
-                width: { ideal: 640 }, 
-                height: { ideal: 480 } 
-            } 
-        });
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } });
         kamera.srcObject = stream;
         
         screenSelect.classList.remove('active');
@@ -47,7 +40,7 @@ btnStartGame.addEventListener('click', async function() {
         statusJepret.innerText = "GET READY!";
     } catch (error) {
         console.error(error);
-        alert("Gagal akses kamera! Pastikan izin kamera sudah diberikan (cek ikon gembok di pojok kiri atas browser).");
+        alert("Gagal akses kamera! Pastikan izin kamera sudah diberikan.");
     }
 });
 
@@ -76,11 +69,9 @@ btnCapture.addEventListener('click', async function() {
         tempCanvas.height = 480;
         let tempCtx = tempCanvas.getContext('2d');
         
-        // EFEK MIRROR Cermin
         tempCtx.translate(640, 0); 
         tempCtx.scale(-1, 1);      
         
-        // --- LOGIKA CROP ANTI GEPENG ---
         const videoRatio = kamera.videoWidth / kamera.videoHeight;
         const canvasRatio = 640 / 480;
         let sWidth = kamera.videoWidth;
@@ -89,16 +80,13 @@ btnCapture.addEventListener('click', async function() {
         let sy = 0;
 
         if (videoRatio > canvasRatio) {
-            // Kamera terlalu lebar (Landscape berlebih), potong kiri-kanan
             sWidth = kamera.videoHeight * canvasRatio;
             sx = (kamera.videoWidth - sWidth) / 2;
         } else {
-            // Kamera terlalu tinggi (HP Portrait), potong atas-bawah
             sHeight = kamera.videoWidth / canvasRatio;
             sy = (kamera.videoHeight - sHeight) / 2;
         }
 
-        // Menggambar hasil yang sudah di-crop dengan presisi ke kanvas
         tempCtx.drawImage(kamera, sx, sy, sWidth, sHeight, 0, 0, 640, 480);
         kumpulanFoto.push(tempCanvas);
 
@@ -135,7 +123,7 @@ function buatStripFinal(photos) {
     };
     
     imgOverlay.onerror = function() {
-        alert("File " + selectedTemplate + " tidak ditemukan! Cek nama filenya coy.");
+        alert("File " + selectedTemplate + " tidak ditemukan!");
     };
 }
 
