@@ -1,0 +1,25 @@
+<svg width="480" height="1200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask id="bolong">
+      <rect width="100%" height="100%" fill="white" />
+      <rect x="30" y="30" width="420" height="315" fill="black" />
+      <rect x="30" y="375" width="420" height="315" fill="black" />
+      <rect x="30" y="720" width="420" height="315" fill="black" />
+    </mask>
+  </defs>
+  <rect width="480" height="1200" fill="#1d4ed8" mask="url(#bolong)" />
+  <rect width="480" height="1200" fill="none" stroke="#000" stroke-width="30" />
+  
+  <g transform="translate(60, 1070) scale(5)">
+    <rect x="6" y="0" width="4" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="4" y="4" width="8" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="0" y="8" width="16" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="2" y="12" width="12" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="4" y="16" width="3" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="9" y="16" width="3" height="4" fill="#facc15" stroke="#000" stroke-width="1"/>
+    <rect x="6" y="8" width="1" height="2" fill="#000"/>
+    <rect x="9" y="8" width="1" height="2" fill="#000"/>
+  </g>
+
+  <text x="270" y="1135" font-family="monospace" font-size="45" font-weight="900" fill="#facc15" text-shadow="4px 4px 0px #000">SUPER STAR</text>
+</svg>

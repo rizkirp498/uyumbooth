@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uyumbooth - Arcade Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <div id="screen-select" class="screen active">
+            
+            <div class="mascot-area">
+                <div class="mascot">🦖</div>
+                <div class="mascot cat">😸</div>
+            </div>
+
+            <div class="header">
+                <h1 class="logo-title">UYUM<span>BOOTH</span></h1>
+                <p class="subtitle">CAPTURE YOUR MOMENT IN STYLE</p>
+            </div>
+
+            <h2 class="section-title">SELECT YOUR FRAME</h2>
+            <div class="frame-grid">
+                <div class="frame-card selected" data-frame="strip1.svg">
+                    <span class="icon">🦖</span> DINO
+                </div>
+                <div class="frame-card" data-frame="strip2.svg">
+                    <span class="icon">😸</span> CAT
+                </div>
+                <div class="frame-card" data-frame="strip3.svg">
+                    <span class="icon">⭐</span> STAR
+                </div>
+            </div>
+            <button id="btnStartGame" class="btn btn-green">START GAME</button>
+        </div>
+
+        <div id="screen-camera" class="screen">
+            <h2 id="statusJepret" class="section-title">GET READY!</h2>
+            <div class="camera-wrapper">
+                <video id="kamera" autoplay playsinline></video>
+                <div id="countdown" class="hidden">3</div>
+                <div id="flash" class="hidden"></div>
+            </div>
+            <div class="action-bar">
+                <button id="btnCapture" class="btn btn-red">🔴 SNAP 3</button>
+                <button id="btnBackToSelect" class="btn btn-yellow">⬅ BACK</button>
+            </div>
+        </div>
+
+        <div id="screen-result" class="screen">
+            <h2 class="mission-title">MISSION COMPLETE!</h2>
+            <div class="result-wrapper">
+                <canvas id="kanvasFoto" width="480" height="1200"></canvas>
+            </div>
+            <div class="action-grid">
+                <button id="btnDownload" class="btn btn-blue">💾 SAVE</button>
+                <button id="btnReplay" class="btn btn-red">🔄 REPLAY</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
