@@ -71,16 +71,35 @@ btnCapture.addEventListener('click', async function() {
         flashEl.classList.add('flash-anim');
         await sleep(100);
 
-        // Pengambilan tetap di rasio landscape untuk kanvas cetak
         let tempCanvas = document.createElement('canvas');
         tempCanvas.width = 640;
         tempCanvas.height = 480;
         let tempCtx = tempCanvas.getContext('2d');
         
-        // Memastikan hasil jepretan dari video menyesuaikan ukuran canvas tanpa memanjang
+        // EFEK MIRROR Cermin
         tempCtx.translate(640, 0); 
         tempCtx.scale(-1, 1);      
-        tempCtx.drawImage(kamera, 0, 0, 640, 480);
+        
+        // --- LOGIKA CROP ANTI GEPENG ---
+        const videoRatio = kamera.videoWidth / kamera.videoHeight;
+        const canvasRatio = 640 / 480;
+        let sWidth = kamera.videoWidth;
+        let sHeight = kamera.videoHeight;
+        let sx = 0;
+        let sy = 0;
+
+        if (videoRatio > canvasRatio) {
+            // Kamera terlalu lebar (Landscape berlebih), potong kiri-kanan
+            sWidth = kamera.videoHeight * canvasRatio;
+            sx = (kamera.videoWidth - sWidth) / 2;
+        } else {
+            // Kamera terlalu tinggi (HP Portrait), potong atas-bawah
+            sHeight = kamera.videoWidth / canvasRatio;
+            sy = (kamera.videoHeight - sHeight) / 2;
+        }
+
+        // Menggambar hasil yang sudah di-crop dengan presisi ke kanvas
+        tempCtx.drawImage(kamera, sx, sy, sWidth, sHeight, 0, 0, 640, 480);
         kumpulanFoto.push(tempCanvas);
 
         await sleep(400); 
