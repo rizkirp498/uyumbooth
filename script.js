@@ -138,12 +138,37 @@ btnReplay.addEventListener('click', () => {
     screenSelect.classList.add('active');
 });
 
-btnDownload.addEventListener('click', () => {
+btnDownload.addEventListener('click', async () => {
     const dataURI = kanvasFoto.toDataURL('image/png');
+
+    // Cek apakah fitur Share bawaan HP tersedia
+    if (navigator.share) {
+        try {
+            // Ubah gambar Canvas jadi format File yang bisa dibaca galeri HP
+            const response = await fetch(dataURI);
+            const blob = await response.blob();
+            const file = new File([blob], 'Uyumbooth_Arcade.png', { type: 'image/png' });
+
+            // Munculkan menu Share/Save bawaan HP
+            await navigator.share({
+                files: [file],
+                title: 'Uyumbooth Moment'
+            });
+            return; // Berhenti di sini kalau sukses pakai fitur Share
+        } catch (error) {
+            console.log('Batal share atau error:', error);
+            // Kalau user batalin menu share, lanjut ke cara biasa di bawah
+        }
+    }
+
+    // Cara biasa (jalan lancar buat buka di Laptop/PC)
     const link = document.createElement('a');
     link.download = 'Uyumbooth_Arcade.png';
     link.href = dataURI;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    // Kasih tau trik pamungkas buat HP kalau semuanya gagal
+    alert("TIPS: Kalau fotonya tidak masuk galeri, tekan dan tahan fotonya di layar, lalu pilih 'Simpan Gambar' / 'Add to Photos' ya wok!");
 });
